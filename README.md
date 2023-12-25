@@ -58,5 +58,63 @@ pred = model.predict(X)
 # decode the prediction
 decode_predictions(pred)
 ```
-Prediction without training the model
+**Prediction without training the model**
 ![prediction1](./photos/prediction1.png)
+
+## Transfer training
+- **load the data**
+```python
+train_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
+train_ds = train_gen.flow_from_directory(
+    "./train",
+    target_size=(150, 150),
+    batch_size=32
+)
+val_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
+val_ds = val_gen.flow_from_directory(
+    "./valid",
+    target_size=(150, 150),
+    batch_size=32,
+    shuffle=False
+)
+```
+
+- **Load the base model**
+```python
+# base model
+base_model = Xception(
+    weights="imagenet",
+    include_top=False,
+    input_shape=(150, 150, 3)
+)
+
+# freeze
+base_model.trainable = False
+```
+
+```python
+# train the top
+inputs = keras.Input(shape=(150, 150, 3))
+# 3D
+base = base_model(inputs, training=False)
+# => 2D
+pooling = keras.layers.GlobalAveragePooling2D()
+# => vector
+vectors = pooling(base)
+# add class layer
+outputs = keras.layers.Dense(525)(vectors)
+
+model = keras.Model(inputs, outputs)
+```
+
+```python
+preds = model.predict(X)
+# the output does not make sense without training
+preds[0]
+```
+
+## Train the model
+- **turning with different learning rate [0.001, 0.01, 0.1]**
+![learningrate](photos/learningrate.png)
+
+- 
