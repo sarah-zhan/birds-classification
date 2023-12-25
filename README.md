@@ -226,7 +226,7 @@ val_ds = val_gen.flow_from_directory(
 ![augmentation](photos/augmentation.png)
 
 ---
-Initially 150x150 size was used to turning the model. After the best parameters are picked, we can train a larger model with the size of 299x299
+Initially 150x150 size was used to turn the model. After the best parameters are picked, we can train a larger model with the size of 299x299
 ---
 
 ## Train a larger model
@@ -238,7 +238,7 @@ droprate = 0.2
 input_size = 299
 ```
 - use checkpoint to save the best model
-**xception_v4_36_0.929.h5 is the best**
+**`xception_v4_36_0.929.h5` is the best**
 ![largermodel](photos/largermodel.png)
 
 ## Use the model the test
@@ -262,7 +262,7 @@ max_class = max(class_pred_dict, key=class_pred_dict.get) # => 'ALBATROSS', it m
 ```
 
 ---
-Since the model is large, when you git the file, an error might prompt
+Since the model is large, when you git the file, an error might prompt<br>
 `this exceeds GitHub's file size limit of 100.00 MB remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.`
 
 Solution:
