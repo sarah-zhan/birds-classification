@@ -222,3 +222,21 @@ val_ds = val_gen.flow_from_directory(
 ```
 **After the augmentation, the accuracy is close to what we have before. It does not improve the result.**
 ![augmentation](photos/augmentation.png)
+
+---
+Initially 150x150 size was used to turning the model. After the best parameters are picked, we can train a larger model with the size of 299x299
+---
+
+## Train a larger model
+- use the same make_model function with
+```python
+learning_rate = 0.0005
+size = 100
+droprate = 0.2
+input_size = 299
+```
+- use checkpoint to save the best model
+**xception_v4_36_0.929.h5 is the best**
+![largermodel](photos/largermodel.png)
+
+
