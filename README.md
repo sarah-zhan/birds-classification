@@ -238,6 +238,7 @@ droprate = 0.2
 input_size = 299
 ```
 - use checkpoint to save the best model
+![v4-model](photos/v4-model.png)
 **`xception_v4_36_0.929.h5` is the best**
 ![largermodel](photos/largermodel.png)
 
