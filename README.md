@@ -3,6 +3,7 @@
 - Data set of 525 bird species from Kaggle. 84635 training images, 2625 test images(5 images per species) and 2625 validation images(5 images per species). You can download the data in Kaggle. Since the file is too large, I have NOT uploaded the archive.zip of the dataset here. It includes train/valid/test dataset, a csv file, and a trained model from the owner of the dataset. We would NOT use the model because we will train it on our own.
 - Objective: to use tensorflow, keras to train a model using the dataset and we can use our trained model to make a prediction
 - Use cloud GPU for the training
+- All details are in `birds-classification-model-training.ipynb`
 
 ## EDA
 Explore the dataset
