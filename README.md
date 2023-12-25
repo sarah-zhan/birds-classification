@@ -46,7 +46,7 @@ from tensorflow.keras.applications.xception import Xception
 from tensorflow.keras.applications.xception import preprocess_input
 from tensorflow.keras.applications.xception import decode_predictions
 # load the model
-model = Xception(weights="imagenet", input_shape=(299, 299, 3)
+model = Xception(weights="imagenet", input_shape=(299, 299, 3))
 ```
 
 ```python
