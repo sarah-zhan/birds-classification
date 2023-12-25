@@ -190,3 +190,35 @@ Due to the limited space in github, all the models have not been uploaded.
 
 **The best droprate is 0.2.**
 ![droprate](photos/droprate.png)
+
+## Data augmentation
+- Different data augmentations
+- Training a model with augmentations
+- Only use it when the accuracy is better. Only added to the train data, you can pick one or a few together. Need to do your own experiment to decide which one to pick.
+```python
+train_gen = ImageDataGenerator(
+    preprocessing_function=preprocess_input,
+    rotation_range=30,
+    width_shift_range=10,
+    height_shift_range=10,
+    shear_range=10,
+    zoom_range=0.1
+    vertical_flip=True
+)
+
+train_ds = train_gen.flow_from_directory(
+    "./train",
+    target_size=(150, 150),
+    batch_size=32
+)
+# val dataset keep the same
+val_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
+val_ds = val_gen.flow_from_directory(
+    "./valid",
+    target_size=(150, 150),
+    batch_size=32,
+    shuffle=False
+)
+```
+**After the augmentation, the accuracy is close to what we have before. It does not improve the result.**
+![augmentation](photos/augmentation.png)
