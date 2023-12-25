@@ -239,4 +239,22 @@ input_size = 299
 **xception_v4_36_0.929.h5 is the best**
 ![largermodel](photos/largermodel.png)
 
-
+## Use the model the test
+```python
+# load the model
+model = keras.models.load_model("xception_v4_36_0.929.h5")
+# evaludate the model - accuracy: 0.9345
+model.evaluate(test_ds)
+```
+# choose an image for the test
+```python
+path = "./test/ALBATROSS/1.jpg"
+img = load_img(path, target_size=(299, 299))
+x = np.array(img)
+X = np.array([x])
+X = preprocess_input(X)
+pred = model.predict(X)
+classes = list(test_ds.class_indices.keys()) #classes list
+class_pred_dict = dict(zip(classes, pred[0]))
+max_class = max(class_pred_dict, key=class_pred_dict.get) # => 'ALBATROSS', it matches the real result.
+```
