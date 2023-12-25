@@ -59,11 +59,11 @@ pred = model.predict(X)
 # decode the prediction
 decode_predictions(pred)
 ```
-**Prediction without training the model**
+### Prediction without training the model
 ![prediction1](./photos/prediction1.png)
 
 ## Transfer training
-- **load the data**
+- **Load the data**
 ```python
 train_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
 train_ds = train_gen.flow_from_directory(
@@ -177,9 +177,9 @@ Due to the limited space in github, all the models have not been uploaded.
 ![v1-model](./photos/v1-model.png)
 
 - **adding more layers**
- add this code to the original make_model function `inner = keras.layers.Dense(size_inner, activation="relu")(vectors)`
- turning the inner-size layer with [10, 100, 1000]
- **innser_size=1000 is the best**
+ - add this code to the original make_model function `inner = keras.layers.Dense(size_inner, activation="relu")(vectors)`
+ - turning the inner-size layer with [10, 100, 1000]
+ - **innser_size=1000 is the best**
 ![innersize](photos/innersize.png)
 
 ## Regularization and dropout
@@ -188,7 +188,7 @@ Due to the limited space in github, all the models have not been uploaded.
 - Experimenting with different values
 - add this code `drop = keras.layers.Dropout(droprate)(inner)`
 
-**The best droprate is 0.2.**
+- **The best droprate is 0.2.**
 ![droprate](photos/droprate.png)
 
 ## Data augmentation
