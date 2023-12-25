@@ -180,6 +180,7 @@ Due to the limited space in github, all the models have not been uploaded.
  - add this code to the original make_model function `inner = keras.layers.Dense(size_inner, activation="relu")(vectors)`
  - turning the inner-size layer with [10, 100, 1000]
  - **innser_size=1000 is the best**
+ ---
 ![innersize](photos/innersize.png)
 
 ## Regularization and dropout
@@ -189,6 +190,7 @@ Due to the limited space in github, all the models have not been uploaded.
 - add this code `drop = keras.layers.Dropout(droprate)(inner)`
 
 - **The best droprate is 0.2.**
+---
 ![droprate](photos/droprate.png)
 
 ## Data augmentation
