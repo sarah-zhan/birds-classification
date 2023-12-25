@@ -116,6 +116,37 @@ preds[0]
 
 ## Train the model
 - **turning with different learning rate [0.001, 0.01, 0.1], 0.001 is the BEST**
+```python
+def make_model(learning_rate=0.01):
+    base_model = Xception(
+        weights='imagenet',
+        include_top=False,
+        input_shape=(150, 150, 3)
+    )
+
+    base_model.trainable = False
+
+    #########################################
+
+    inputs = keras.Input(shape=(150, 150, 3))
+    base = base_model(inputs, training=False)
+    vectors = keras.layers.GlobalAveragePooling2D()(base)
+    outputs = keras.layers.Dense(525)(vectors)
+    model = keras.Model(inputs, outputs)
+
+    #########################################
+
+    optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
+    loss = keras.losses.CategoricalCrossentropy(from_logits=True)
+
+    model.compile(
+        optimizer=optimizer,
+        loss=loss,
+        metrics=['accuracy']
+    )
+
+    return model
+```
 ![learningrate](photos/learningrate.png)
 
 - **use checkpoint to save the best model during training**
@@ -142,8 +173,12 @@ history = model.fit(
 )
 ```
 Due to the limited space in github, all the models have not been uploaded.
-The best one is
 **The best one is from epoch#13, val_accuracy = 0.8415**
 ![v1-model](./photos/v1-model.png)
 
+- **adding more layers**
+ add this code to the original make_model function `inner = keras.layers.Dense(size_inner, activation="relu")(vectors)`
+ turning the inner-size layer with [10, 100, 1000]
+ **innser_size=1000 is the best**
+![innersize](photos/innersize.png)
 
