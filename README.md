@@ -2,6 +2,7 @@
 
 - Data set of 525 bird species from Kaggle. 84635 training images, 2625 test images(5 images per species) and 2625 validation images(5 images per species). You can download the data in Kaggle. Since the file is too large, I have NOT uploaded the archive.zip of the dataset here. It includes train/valid/test dataset, a csv file, and a trained model from the owner of the dataset. We would NOT use the model because we will train it on our own.
 - Objective: to use tensorflow, keras to train a model using the dataset and we can use our trained model to make a prediction
+- Use cloud GPU for the training
 
 ## EDA
 Explore the dataset
@@ -114,7 +115,35 @@ preds[0]
 ```
 
 ## Train the model
-- **turning with different learning rate [0.001, 0.01, 0.1]**
+- **turning with different learning rate [0.001, 0.01, 0.1], 0.001 is the BEST**
 ![learningrate](photos/learningrate.png)
 
-- 
+- **use checkpoint to save the best model during training**
+```python
+model.save_weights('model_v1.h5', save_format='h5')
+
+checkpoint = keras.callbacks.ModelCheckpoint(
+    'xception_v1_{epoch:02d}_{val_accuracy:.3f}.h5',
+    save_best_only=True,
+    monitor='val_accuracy',
+    mode='max'
+)
+```
+```python
+learning_rate = 0.001
+
+model = make_model(learning_rate=learning_rate)
+
+history = model.fit(
+    train_ds,
+    epochs=15,
+    validation_data=val_ds,
+    callbacks=[checkpoint]
+)
+```
+Due to the limited space in github, all the models have not been uploaded.
+The best one is
+**The best one is from epoch#13, val_accuracy = 0.8415**
+![v1-model](./photos/v1-model.png)
+
+
