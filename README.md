@@ -37,3 +37,26 @@ x = np.array(img)
 # check the shape of the image
 x.shape
 ```
+
+## Pre-trained convolutional neural networks
+- use Xception
+
+```python
+from tensorflow.keras.applications.xception import Xception
+from tensorflow.keras.applications.xception import preprocess_input
+from tensorflow.keras.applications.xception import decode_predictions
+# load the model
+model = Xception(weights="imagenet", input_shape=(299, 299, 3)
+```
+
+```python
+# convert all the images to numpy
+X = np.array([x])
+# preprocess images
+X = preprocess_input(X)
+pred = model.predict(X)
+# decode the prediction
+decode_predictions(pred)
+```
+Prediction without training the model
+![prediction1](./photos/prediction1.png)
