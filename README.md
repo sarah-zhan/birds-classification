@@ -258,3 +258,26 @@ classes = list(test_ds.class_indices.keys()) #classes list
 class_pred_dict = dict(zip(classes, pred[0]))
 max_class = max(class_pred_dict, key=class_pred_dict.get) # => 'ALBATROSS', it matches the real result.
 ```
+
+---
+Since the model is large, when you git the file, an error might prompt
+`this exceeds GitHub's file size limit of 100.00 MB remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.`
+
+Solution:
+- download from https://git-lfs.github.com
+- use the below command one by one
+```python
+git lfs version
+git lfs install
+git lfs track "*.h5"
+git add --all
+git commit -m "Add large .h5 files"
+git push
+```
+- if you still have a problem, try
+```python
+git lfs migrate info
+git lfs migrate import --include="*.h5" --include-ref=refs/heads/main
+git push origin main
+```
+---
