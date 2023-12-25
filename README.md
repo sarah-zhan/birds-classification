@@ -182,3 +182,11 @@ Due to the limited space in github, all the models have not been uploaded.
  **innser_size=1000 is the best**
 ![innersize](photos/innersize.png)
 
+## Regularization and dropout
+- Regularizing by freezing a part of the network
+- Adding dropout to our model
+- Experimenting with different values
+- add this code `drop = keras.layers.Dropout(droprate)(inner)`
+
+**The best droprate is 0.2.**
+![droprate](photos/droprate.png)
