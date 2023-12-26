@@ -482,3 +482,24 @@ memory: 512MB
 ![memory](./photos/memory.png)
 
 ![lambda_test](./photos/lambda_test.png)
+
+## AWS API Gateway
+- create a POST resource with the Lambda function as the trigger
+- test
+![api-test](./photos/api-test.png)
+![api-test-result](./photos/api-test-result.png)
+- deploy
+ - new stage -> name a new stage (eg: beta or test) -> deploy
+ - Dashboard -> URL
+ - update your test.py with the new url+predict
+ - run the test again `python3 test.py`
+ - return the result
+ - to hide your endpoint
+    - create `.env` file -> write your AWS_LAMBDA_URL="https://......../predict"
+    - in `test.py` file
+    ```python
+    from dotenv import load_dotenv
+    import os
+l   oad_dotenv()
+    url = os.getenv("AWS_LAMBDA_URL")
+    ```
