@@ -358,3 +358,20 @@ max_class = max(class_pred_dict, key=class_pred_dict.get)
 
 
 ## Docker
+```python
+# Dockerfile
+FROM public.ecr.aws/lambda/python:3.9
+
+RUN pip install keras-image-helper
+RUN pip install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
+
+COPY xception_v4_36_0.929.tflite .
+COPY lambda_function.py .
+
+CMD ["lambda_function.lambda_handler"]
+```
+### build a docker
+```python
+docker build -t birds-classification-model .
+```
+
