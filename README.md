@@ -347,11 +347,14 @@ preds = interpreter.get_tensor(output_index)
 class_pred_dict = dict(zip(classes, preds[0]))
 max_class = max(class_pred_dict, key=class_pred_dict.get)
 ```
-### Transfer the code to scripts
+## Transfer the code to scripts
 - test the lambda function
     - in terminal `ipython` -> `import lambda_function`
     - lambda_function.predict("./test/AFRICAN CROWNED CRANE/1.jpg") ->
-    
+
 ![lambda1](photos/lambda1.png)
 
 ![lambda2](photos/lambda2.png)
+
+
+## Docker
