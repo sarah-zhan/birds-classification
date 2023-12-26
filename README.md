@@ -1,8 +1,8 @@
 # [Birds Classification](https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data)
 
-- Data set of 525 bird species from Kaggle. 84635 training images, 2625 test images(5 images per species) and 2625 validation images(5 images per species). You can download the data in Kaggle. Since the file is too large, I have NOT uploaded the archive.zip of the dataset here. It includes train/valid/test dataset, a csv file, and a trained model from the owner of the dataset. We would NOT use the model because we will train it on our own.
+- Data set of 525 bird species from Kaggle. 84,635 training images, 2,625 test images(5 images per species) and 2,625 validation images(5 images per species). You can download the data in Kaggle. Since the data files are too large, I have NOT uploaded the dataset here. It includes train/valid/test dataset, a csv file, and a trained model from the owner of the dataset. We would NOT use the model because we will train it on our own.
 - Objective: to use tensorflow, keras to train a model using the dataset and we can use our trained model to make a prediction
-- Use cloud GPU for the training
+- I have used [Saturn Cloud](https://saturncloud.io/) free tier for this project
 - All details are in `birds-classification-model-training.ipynb`
 
 ## EDA
@@ -285,3 +285,66 @@ git lfs migrate import --include="*.h5" --include-ref=refs/heads/main
 git push origin main
 ```
 ---
+
+## Convert Keras to TF-Lite - only include inference (prediction)
+- use TF-Lite to do the prediction
+
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+model = keras.models.load_model("xception_v4_36_0.929.h5")
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+
+with open('xception_v4_36_0.929.tflite', 'wb') as f_out:
+    f_out.write(tflite_model)
+```
+- install the packages
+```python
+!pip install keras-image-helper
+!pip install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
+```
+- load the model
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+model = keras.models.load_model("xception_v4_36_0.929.h5")
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+
+with open('xception_v4_36_0.929.tflite', 'wb') as f_out:
+    f_out.write(tflite_model)
+```
+- get the classes
+```python
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+train_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
+train_ds = train_gen.flow_from_directory(
+    "./train",
+    target_size=(150, 150),
+    batch_size=32
+)
+classes = list(train_ds.class_indices.keys())
+```
+- get predictions
+```python
+import tflite_runtime.interpreter as tflite
+from keras_image_helper import create_preprocessor
+interpreter = tflite.Interpreter(model_path="xception_v4_36_0.929.tflite")
+interpreter.allocate_tensors()
+
+input_index = interpreter.get_input_details()[0]["index"]
+output_index = interpreter.get_output_details()[0]["index"]
+
+preprocessor = create_preprocessor("xception", target_size=(299, 299))
+path = "./test/AFRICAN CROWNED CRANE/1.jpg"
+X = preprocessor.from_path(path)
+interpreter.set_tensor(input_index, X)
+interpreter.invoke()
+preds = interpreter.get_tensor(output_index)
+class_pred_dict = dict(zip(classes, preds[0]))
+max_class = max(class_pred_dict, key=class_pred_dict.get)
+```
+
