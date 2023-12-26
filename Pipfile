@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+flask = "*"
+requests = "*"
+pandas = "*"
+matplotlib = "*"
+tensorflow = "*"
+keras = "*"
+tflite-runtime = "*"
+keras-image-helper = "*"
+
+[dev-packages]

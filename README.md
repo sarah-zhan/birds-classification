@@ -362,6 +362,11 @@ max_class = max(class_pred_dict, key=class_pred_dict.get)
 - open another terminal to run your `test.py` with `python3 test.py`. Or you might just need `python test.py`. If it shows the category of the bird, the model and server are working.
 - `Ctrl + c` to end the server
 
+## Virtual Environment
+- to build a virtual environment, run `pip install pipenv`
+- install packages `pipenv install numpy flask requests pandas matplotlib tensorflow keras tflite_runtime keras_image_helper`
+- now we have `Pipfile` and `Pipfile.lock`
+
 ## Docker
 ```python
 # Dockerfile
