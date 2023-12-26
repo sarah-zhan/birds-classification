@@ -466,5 +466,9 @@ Test event
 - timeout error
 "errorMessage": "2023-12-26T06:08:51.451Z 0ef69c65-21d9-437b-89d8-50c8c3c04f23 Task timed out after 3.08 seconds"
 - to fix the error -> configuration -> general config-> timeout/memory
+timeout: 2min 30 seconds
+memory: 512MB
 ![timeout](./photos/timeout.png)
 ![memory](./photos/memory.png)
+
+![lambda_test](./photos/lambda_test.png)
