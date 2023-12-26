@@ -391,7 +391,7 @@ print(result)
 ```
 
 ## Deploy to lambda
-### aws cli
+- aws cli
 ```python
 # install awscli if you dont have it
 pip install awscli
@@ -422,7 +422,9 @@ Return:
 aws ecr get-login --no-include-email | sed 's/[0-9a-zA-Z=]\{20,\}/PASSWORD/g'
 ```
 Return:
-`docker login -u AWS -p PASSWORD https://610428526296.dkr.ecr.us-east-2.amazonaws.com`
+```python
+docker login -u AWS -p PASSWORD https://610428526296.dkr.ecr.us-east-2.amazonaws.com
+```
 
 - execute login
 ```python
@@ -455,3 +457,14 @@ docker push ${REMOTE_URI}
 ```
 - aws ecr image
 ![ecr](./photos/ecr.png)
+
+- lambda function
+choose container image option
+![lambda-creation](./photos/lambda-creation.png)
+Test event
+![lambda-test](./photos/lambda-test.png)
+- timeout error
+"errorMessage": "2023-12-26T06:08:51.451Z 0ef69c65-21d9-437b-89d8-50c8c3c04f23 Task timed out after 3.08 seconds"
+- to fix the error -> configuration -> general config-> timeout/memory
+![timeout](./photos/timeout.png)
+![memory](./photos/memory.png)
