@@ -503,3 +503,27 @@ memory: 512MB
 l   oad_dotenv()
     url = os.getenv("AWS_LAMBDA_URL")
     ```
+
+## Build a Streamlit frontend
+- `pip install streamlit` install streamlit
+- import other packages in app.py
+- write a tile `st.write`
+- create a title, header `st.title`, `st.header`
+- upload file `st.file_uploader`
+- display the image
+    ```python
+    image = Image.open(uploaded_file).convert('RGB')
+    st.image(image, use_column_width=True)
+    ```
+- upload the image to a cloud storage (eg: aws s3)
+    ```python
+    s3 = boto3.client('s3')
+    with open("temp.jpg", "rb") as data:
+        s3.upload_fileobj(data, 'birds-classification', 'myimage.jpg')
+    ```
+- call the Lambda function and show the result
+- run `streamlit run app.py` to start the server
+- register an account in streamlit
+- push your code in github
+- click "Deploy" button when viewing your app at the up-right corner
+- confirm your github folder, you main app name, for example app.py
