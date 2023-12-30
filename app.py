@@ -10,6 +10,8 @@ load_dotenv()
 
 # Lambda URL
 url = os.getenv("AWS_LAMBDA_URL")
+# s3 bucket url
+s3_bucket_url = os.getenv('S3_BUCKET_URL')
 
 # set title
 st.title('Birds Classifier')
@@ -34,8 +36,8 @@ if uploaded_file is not None:
     with open("temp.jpg", "rb") as data:
         s3.upload_fileobj(data, 'birds-classification', 'myimage.jpg')
 
-    # Now 'myimage.jpg' is accessible at 'https://mybucket.s3.amazonaws.com/myimage.jpg'
-    img_url = 'https://birds-classification.s3.amazonaws.com/myimage.jpg'
+    # Now 'myimage.jpg' is accessible 
+    img_url = f'{s3_bucket_url}/myimage.jpg'
 
     # Send the image URL as JSON data
     result = requests.post(url, json={"url": img_url})
