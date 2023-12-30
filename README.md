@@ -3,7 +3,8 @@
 - Data set of 525 bird species from Kaggle. 84,635 training images, 2,625 test images(5 images per species) and 2,625 validation images(5 images per species). You can download the data in Kaggle. Since the data files are too large, I have NOT uploaded the dataset here. It includes train/valid/test dataset, a csv file, and a trained model from the owner of the dataset. We would NOT use the model because we will train it on our own.
 - Objective: to use tensorflow, keras to train a model using the dataset and we can use our trained model to make a prediction
 - I have used [Saturn Cloud](https://saturncloud.io/) free tier for this project
-- All details are in `birds-classification-model-training.ipynb`
+- All training details are in `birds-classification-model-training.ipynb`
+- Use AWS Lambda function to predict the category
 
 ## EDA
 Explore the dataset
@@ -535,4 +536,5 @@ l   oad_dotenv()
     AWS_SECRET_ACCESS_KEY = "secret_key"
     AWS_REGION = "region"
     ```
+- Congrats! Your app is live 🎊 [Birds Clissifier](https://sarah-zhan-birds-classification-app-hbqo7w.streamlit.app/)
 ![birds-classification](photos/birds-classification.gif)
