@@ -6,6 +6,20 @@
 - All training details are in `birds-classification-model-training.ipynb`
 - Use AWS Lambda function to predict the category
 
+## Takeaways
+- TensorFlow and keras for deep learning
+- Use pre-trained models xception for general image classification
+- Convolutional layers - turn an image into a vector
+- Dense layers - use the vector to make the predictions
+- use transfer learning and re-use - already trained convolutional layers
+- First, train a small model (150x150) before training a big one (299x299)
+- Tune learning rate - how fast the model trains; tune inner-layer
+- Save the best model using callbacks and checkpointing
+- To avoid overfitting, use dropout and augmentation
+- Use AWS Lambda API to make a prediction
+- US AWS S3 to save the images
+- Build a frontend with Streamlit
+
 ## EDA
 Explore the dataset
 ```python
