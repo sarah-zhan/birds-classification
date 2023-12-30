@@ -527,3 +527,12 @@ l   oad_dotenv()
 - push your code in github
 - click "Deploy" button when viewing your app at the up-right corner
 - confirm your github folder, you main app name, for example app.py
+- if you have credentail errors, go to setting to add all your secrets
+    ```python
+    AWS_LAMBDA_URL="your_url"
+    S3_BUCKET_URL="your_bucket_url"
+    AWS_ACCESS_KEY_ID = "key"
+    AWS_SECRET_ACCESS_KEY = "secret_key"
+    AWS_REGION = "region"
+    ```
+![birds-classification](photos/birds-classification.gif)

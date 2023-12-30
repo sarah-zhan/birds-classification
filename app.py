@@ -36,7 +36,7 @@ if uploaded_file is not None:
     with open("temp.jpg", "rb") as data:
         s3.upload_fileobj(data, 'birds-classification', 'myimage.jpg')
 
-    # Now 'myimage.jpg' is accessible 
+    # Now 'myimage.jpg' is accessible
     img_url = f'{s3_bucket_url}/myimage.jpg'
 
     # Send the image URL as JSON data
