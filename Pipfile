@@ -13,5 +13,7 @@ tensorflow = "*"
 keras = "*"
 tflite-runtime = "*"
 keras-image-helper = "*"
+python-dotenv = "*"
+boto3 = "*"
 
 [dev-packages]

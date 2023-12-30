@@ -3,8 +3,6 @@ from PIL import Image
 import requests
 from dotenv import load_dotenv
 import os
-import base64
-import io
 import boto3
 
 # take environment variables from .env
@@ -26,7 +24,7 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png
 # display image
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert('RGB')
-    st.image(image, use_column_width=True)
+    st.image(image, use_column_width=False, width=300)
 
     # Save the image to a file
     image.save("temp.jpg", format="JPEG")
